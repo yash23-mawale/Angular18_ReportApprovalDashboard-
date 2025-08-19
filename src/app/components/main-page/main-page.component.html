@@ -1,1 +1,26 @@
-<p>main-page works!</p>
+<form (ngSubmit)="Search(form)" #form="ngForm">
+<div class="filters">
+  <select name="LineNum" ngModel>
+    <option value="" disabled selected>SELECT LINE</option>
+    <option value="line1">LINE 1</option>
+    <option value="line2">LINE 2</option>
+    <option value="line3">LINE 3</option>
+    <option value="line4">LINE 4</option>
+    <option value="line5">LINE 5</option>
+  </select>
+
+  <input type="date" placeholder="From Date" name="FromDate" ngModel>
+  <input type="date" placeholder="To Date" name="ToDate" ngModel>
+
+  <button type="submit" [disabled]="form.invalid">Filter</button>
+</div>
+</form>
+
+<div class="charts-grid">
+  <app-status-donut [chartData]="data"></app-status-donut>
+  <!-- <app-pending-line-donut></app-pending-line-donut>
+  <app-reviewer-donut></app-reviewer-donut>
+  <app-daywise-stacked></app-daywise-stacked>
+  <app-user-approval-bar></app-user-approval-bar> -->
+</div>
+
