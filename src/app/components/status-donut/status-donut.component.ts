@@ -4,9 +4,6 @@ import * as am5percent from "@amcharts/amcharts5/percent";
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 import { statusCounts } from '../../model/interfaces';
 
-
-
-
 @Component({
   selector: 'app-status-donut',
   standalone: true,
@@ -22,8 +19,14 @@ export class StatusDonutComponent {
   private series!: am5percent.PieSeries;
 
   ngAfterViewInit(): void {
+    this.createChart()
+  }
+
+  createChart():void{
+
     // Root
     this.root = am5.Root.new('chartdiv');
+    this.root._logo?.dispose()
     this.root.setThemes([am5themes_Animated.new(this.root)]);
 
     // Chart
@@ -44,13 +47,19 @@ export class StatusDonutComponent {
     );
 
     this.series.labels.template.setAll({
-      text: "{category}: {value}",
-      textType: 'circular',
-      centerX: 0,
-      centerY: 0,
+      text: "{value}",
+      radius: -40,              // negative = andar ki taraf
+      centerX: am5.percent(50), // horizontal center
+      centerY: am5.percent(0),  // slice ke top ke paas
+      textAlign: "center",
+      populateText: true
     });
 
-    // ✅ Animation
+    this.series.ticks.template.setAll({
+      forceHidden: true   // tick line disable
+    });
+
+    // Animation
     this.series.appear(1000, 100);
 
     // Legend
@@ -68,6 +77,7 @@ export class StatusDonutComponent {
     if (this.chartData?.length) {
       this.series.data.setAll(this.chartData);
     }
+
   }
 
   ngOnChanges(changes: SimpleChanges): void {

@@ -19,8 +19,8 @@
 <div class="charts-grid">
   <app-status-donut [chartData]="data1"></app-status-donut>
   <app-pending-line-donut [chartData]="data2"></app-pending-line-donut>
-  <!--<app-reviewer-donut></app-reviewer-donut>
-  <app-daywise-stacked></app-daywise-stacked>-->
+  <app-reviewer-donut [chartData]="data3"></app-reviewer-donut>
+  <app-daywise-stacked [DayWiseReportData]="data4"></app-daywise-stacked>
   <app-user-approval-bar [UserPrograss]="data5"></app-user-approval-bar>
 </div>
 

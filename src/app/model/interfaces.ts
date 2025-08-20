@@ -13,6 +13,17 @@ export interface UserBar{
     ApprovedReport_Count:number
 }
 
+export interface ReviewerCount{
+    date:string,
+    count:number
+}
+
+export interface DaywiseStacked{
+    date:string,
+    uploaded:number,
+    reviewed:number,
+    approved:number
+}
 
 export interface Filter{
     LineNum:string,

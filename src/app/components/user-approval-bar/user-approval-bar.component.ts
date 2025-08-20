@@ -20,8 +20,14 @@ export class UserApprovalBarComponent implements AfterViewInit, OnChanges, OnDes
   private series!: am5xy.ColumnSeries;
 
   ngAfterViewInit(): void {
+    this.CreateChart()
+  }
+
+  CreateChart():void{
+
     // Root
     this.root = am5.Root.new("userbar");
+    this.root._logo?.dispose()
     this.root.setThemes([am5themes_Animated.new(this.root)]);
 
     // Chart

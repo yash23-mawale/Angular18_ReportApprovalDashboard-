@@ -19,8 +19,13 @@ export class PendingLineDonutComponent {
       private series!: am5percent.PieSeries;
     
       ngAfterViewInit(): void {
-        // Root
+        this.createChart()
+      }
+
+      createChart():void{
+           // Root
         this.root = am5.Root.new('pendingline');
+        this.root._logo?.dispose()
         this.root.setThemes([am5themes_Animated.new(this.root)]);
     
         // Chart
@@ -41,12 +46,18 @@ export class PendingLineDonutComponent {
         );
     
         this.series.labels.template.setAll({
-          text: "{category}: {value}",
-          textType: 'circular',
-          centerX: 0,
-          centerY: 0,
+             text: "{value}",
+             radius: -45,              // negative = andar ki taraf
+             centerX: am5.percent(50), // horizontal center
+             centerY: am5.percent(0),  // slice ke top ke paas
+             textAlign: "center",
+             populateText: true
         });
     
+        this.series.ticks.template.setAll({
+        forceHidden: true   // tick line disable
+          });
+
         // ✅ Animation
         this.series.appear(1000, 100);
     
@@ -65,8 +76,8 @@ export class PendingLineDonutComponent {
         if (this.chartData?.length) {
           this.series.data.setAll(this.chartData);
         }
-      }
-    
+      }    
+
       ngOnChanges(changes: SimpleChanges): void {
         if (changes['chartData'] && this.series) {
           this.series.data.setAll(this.chartData);
